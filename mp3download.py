@@ -21,24 +21,24 @@ class downloader:
         
         #TODO Find a solution for age restricted content
         try:
-            print("check")
+            logging.info("Getting URL info")
             yt = YouTube(url)
             time.sleep(5)
             name = yt.title
-            print("check")
-            print(name)
+            logging.info(f"{name} is being downloaded")
             filename = downloader.remove_special_characters(name)
             mp3file = f"{filename}.mp3"
             
             stream = yt.streams.filter(only_audio=True).order_by('bitrate') \
             .last()
             stream.download(filename=f"{filename}.mp3")
-            
+            logging.info(f"{name} - Successfully downloaded")
             return mp3file
+        
         except Exception as e:
             error_message = str(e)
             if "age restricted" in error_message.lower():
-                print("The video is age-restricted and cannot be accessed without logging in.")
+                logging.error("The video is age-restricted and cannot be accessed without logging in.")
             else:
                 logging.error(e)
 
