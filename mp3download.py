@@ -52,7 +52,7 @@ class downloader:
         output:
         - filename: String with special characters removed 
         '''
-        pattern = r'[\\/:?"*|<>&%#$!,]'
+        pattern = r'[\\/:?"*|<>&%#$!,\s]'
         
         cleaned_string = re.sub(pattern, '', filename)
         
