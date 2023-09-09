@@ -67,4 +67,3 @@ logging.basicConfig(filename='CaptionGeneration.log',
 if __name__ == "__main__":
     downloader()
     
-downloader.download("https://youtu.be/fRRHDXHSsM0?si=n4nUNUyAVah88UZs")
