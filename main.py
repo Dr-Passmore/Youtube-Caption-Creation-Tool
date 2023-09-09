@@ -1,4 +1,4 @@
-import tkinter as ttk
+import tkinter as tk
 import configparser
 import logging
 import os
@@ -18,7 +18,9 @@ class captionCreation():
             captionCreation.configCreation(self, config)
         else:
             pass
-    
+        
+        #mp3download.downloader.download("https://youtu.be/fRRHDXHSsM0?si=n4nUNUyAVah88UZs")
+        userInterface()
     def configCreation(self, config):
         """
         Creates a configuration file 'config.ini' if it doesn't exist.
@@ -40,7 +42,16 @@ class captionCreation():
         except Exception as e:
             logging.error(f"Failed to create config.ini: {e}")
             
-        
+
+class userInterface ():
+    def __init__(self) -> None:
+        self.window = tk.Tk()
+
+        userInterface.generateWindow(self)
+    def generateWindow(self):
+        self.window.mainloop()
+
+
 logging.basicConfig(filename='CaptionGeneration.log', 
                     filemode='a', 
                     level=logging.INFO,
