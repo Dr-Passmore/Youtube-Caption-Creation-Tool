@@ -99,11 +99,16 @@ class userInterface ():
         self.window = tk.Tk()
         self.window.title("Subtitle Generator")
         self.window.geometry("500x500") 
+        exit_button = tk.Button(self.window, text="Exit", command=self.exitProgram)
+        exit_button.pack(pady=10)
+
         userInterface.generateWindow(self)
     
     def generateWindow(self):
         self.window.mainloop()
 
+    def exitProgram(self):
+        self.window.destroy()
 
 logging.basicConfig(filename='CaptionGeneration.log', 
                     filemode='a', 
