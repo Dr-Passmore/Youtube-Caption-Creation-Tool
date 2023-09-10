@@ -22,6 +22,7 @@ class captionCreation():
         
         #mp3download.downloader.download("https://youtu.be/fRRHDXHSsM0?si=n4nUNUyAVah88UZs")
         userInterface()
+
     def configCreation(self, config):
         """
         Creates a configuration file 'config.ini' if it doesn't exist.
@@ -96,8 +97,10 @@ class captionCreation():
 class userInterface ():
     def __init__(self) -> None:
         self.window = tk.Tk()
-
+        self.window.title("Subtitle Generator")
+        self.window.geometry("500x500") 
         userInterface.generateWindow(self)
+    
     def generateWindow(self):
         self.window.mainloop()
 
