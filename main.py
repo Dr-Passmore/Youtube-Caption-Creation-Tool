@@ -44,6 +44,10 @@ class captionCreation():
             logging.error(f"Failed to create config.ini: {e}")
 
     def apiInterface(self):
+        '''
+        Function to create the API key setup interface.
+        This interface allows the user to enter their API key and save it to a configuration file.
+        '''
         self.window = tk.Tk()
         self.window.title("API Key Setup")
         self.window.geometry("300x200") 
@@ -66,6 +70,9 @@ class captionCreation():
         save_button.pack(pady=10)
 
     def saveAPIKey(self):
+        '''
+        Saves the API key and destroys the window once completed
+        '''
         api_key = self.api_key_entry.get()
         if api_key:
             config = configparser.ConfigParser()
@@ -79,9 +86,10 @@ class captionCreation():
 
         self.window.destroy()
 
-    def openLink(self, event):
-    # Function to open the link in a web browser
-        
+    def openLink(self):
+        '''
+        Opens the picovoice.ai link
+        '''
         webbrowser.open("https://console.picovoice.ai/")
             
 
