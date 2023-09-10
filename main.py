@@ -4,18 +4,19 @@ import logging
 import os
 import pvleopard
 import requests
+import webbrowser
 
 import mp3download
 import createSRTFile
 
 class captionCreation():
     def __init__(self):
-        config = configparser.ConfigParser()
         configFile = os.path.exists('config.ini')
         if configFile == False:
             #if the file does not exist then create one
             logging.error("No config file found")
-            captionCreation.configCreation(self, config)
+            captionCreation.apiInterface(self)
+            
         else:
             pass
         
@@ -41,6 +42,47 @@ class captionCreation():
             logging.info('config.ini created successfully')
         except Exception as e:
             logging.error(f"Failed to create config.ini: {e}")
+
+    def apiInterface(self):
+        self.window = tk.Tk()
+        self.window.title("API Key Setup")
+        self.window.geometry("300x200") 
+
+        label_instructions = tk.Label(self.window, text="You can acquire your API key from:")
+        label_instructions.pack(pady=5)
+
+        # Create a clickable hyperlink
+        link_label = tk.Label(self.window, text="https://console.picovoice.ai/", cursor="hand2")
+        link_label.pack(pady=5)
+        link_label.bind("<Button-1>", self.openLink)
+
+        label = tk.Label(self.window, text="Enter your API key:")
+        label.pack(pady=10)
+
+        self.api_key_entry = tk.Entry(self.window)
+        self.api_key_entry.pack()
+
+        save_button = tk.Button(self.window, text="Save", command=self.saveAPIKey)
+        save_button.pack(pady=10)
+
+    def saveAPIKey(self):
+        api_key = self.api_key_entry.get()
+        if api_key:
+            config = configparser.ConfigParser()
+            config.add_section('API Key')
+            config.set('API Key', 'Key', api_key)
+            with open(r"config.ini", 'w') as configuration:
+                config.write(configuration)
+            logging.info('API key saved successfully.')
+        else:
+            logging.error('API key cannot be empty.')
+
+        self.window.destroy()
+
+    def openLink(self, event):
+    # Function to open the link in a web browser
+        
+        webbrowser.open("https://console.picovoice.ai/")
             
 
 class userInterface ():
