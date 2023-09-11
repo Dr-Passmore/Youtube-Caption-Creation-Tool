@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.simpledialog
 import configparser
 import logging
 import os
@@ -99,6 +100,8 @@ class userInterface ():
         self.window = tk.Tk()
         self.window.title("Subtitle Generator")
         self.window.geometry("500x500") 
+        self.window.protocol("WM_DELETE_WINDOW", self.exitProgram)
+
         exit_button = tk.Button(self.window, text="Exit", command=self.exitProgram)
         exit_button.pack(pady=10)
 
@@ -108,7 +111,9 @@ class userInterface ():
         self.window.mainloop()
 
     def exitProgram(self):
-        self.window.destroy()
+        result = tkinter.simpledialog.messagebox.askquestion("Confirm Close", "Are you sure you want to close the application?")
+        if result == "yes":
+            self.window.destroy()
 
 logging.basicConfig(filename='CaptionGeneration.log', 
                     filemode='a', 
